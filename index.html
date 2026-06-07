@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sundar Ram R — AI Engineer</title>
+<title>Sundar Ram R — AI Solutions Architect & Systems Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ─── RESET & BASE ─── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#050810;
-  --bg2:#090e1a;
-  --panel:#0d1525;
+  --bg:#030712;
+  --bg2:#0b1120;
+  --panel:#0f172a;
   --accent:#00f5c8;
-  --accent2:#7b5ef8;
-  --accent3:#f5a623;
+  --accent2:#8b5cf6;
+  --accent3:#f59e0b;
   --text:#e8edf8;
   --muted:#6b7a99;
   --border:rgba(0,245,200,0.12);
@@ -30,13 +30,26 @@ body{
   cursor:none;
 }
 
+/* Grid Background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(rgba(0, 245, 200, 0.02) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 245, 200, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
 /* ─── CUSTOM CURSOR ─── */
 #cursor{
   position:fixed;width:12px;height:12px;
   background:var(--accent);border-radius:50%;
   pointer-events:none;z-index:9999;
   transform:translate(-50%,-50%);
-  transition:transform 0.1s,width 0.2s,height 0.2s,background 0.2s;
+  transition:transform 0.05s,width 0.2s,height 0.2s,background 0.2s;
   mix-blend-mode:screen;
 }
 #cursor-ring{
@@ -44,19 +57,24 @@ body{
   border:1.5px solid var(--accent);border-radius:50%;
   pointer-events:none;z-index:9998;
   transform:translate(-50%,-50%);
-  transition:transform 0.18s ease,width 0.25s,height 0.25s,opacity 0.2s;
+  transition:transform 0.1s ease,width 0.25s,height 0.25s,opacity 0.2s;
   opacity:0.5;
 }
 body:hover #cursor{opacity:1}
 
+@media (pointer: coarse) {
+  #cursor, #cursor-ring { display: none !important; }
+  body { cursor: auto !important; }
+}
+
 /* ─── CANVAS ─── */
-#canvas-bg{position:fixed;inset:0;z-index:0;opacity:0.6}
+#canvas-bg{position:fixed;inset:0;z-index:0;opacity:0.5;pointer-events:none}
 
 /* ─── NOISE OVERLAY ─── */
 body::after{
   content:'';position:fixed;inset:0;z-index:1;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;opacity:0.35;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;opacity:0.3;
 }
 
 /* ─── LAYOUT ─── */
@@ -67,15 +85,16 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:20px 60px;
-  background:rgba(5,8,16,0.7);
+  background:rgba(3,7,18,0.7);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
 .nav-logo{
-  font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;
+  font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;
   color:var(--accent);letter-spacing:0.05em;
+  text-decoration:none;
 }
-.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links{display:flex;gap:35px;list-style:none}
 .nav-links a{
   font-family:'DM Mono',monospace;font-size:0.78rem;
   color:var(--muted);text-decoration:none;letter-spacing:0.1em;
@@ -93,7 +112,7 @@ nav{
 /* ─── HERO ─── */
 #hero{
   min-height:100vh;display:flex;align-items:center;
-  padding:120px 60px 80px;
+  padding:140px 60px 80px;
   position:relative;
 }
 .hero-tag{
@@ -110,10 +129,10 @@ nav{
 }
 .hero-name{
   font-family:'Syne',sans-serif;
-  font-size:clamp(3.5rem,9vw,9rem);
+  font-size:clamp(3rem,8vw,8rem);
   font-weight:800;line-height:0.92;
   letter-spacing:-0.03em;
-  margin-bottom:16px;
+  margin-bottom:20px;
   opacity:0;animation:fadeUp 0.8s 0.35s forwards;
 }
 .hero-name .line1{display:block}
@@ -124,9 +143,9 @@ nav{
   background-clip:text;
 }
 .hero-title{
-  font-size:1.1rem;color:var(--muted);
+  font-size:1.15rem;color:var(--muted);
   font-weight:300;letter-spacing:0.05em;
-  margin-bottom:48px;max-width:520px;
+  margin-bottom:48px;max-width:580px;
   opacity:0;animation:fadeUp 0.8s 0.5s forwards;
   line-height:1.7;
 }
@@ -137,12 +156,12 @@ nav{
 }
 .btn-primary{
   display:inline-flex;align-items:center;gap:10px;
-  background:var(--accent);color:#050810;
+  background:var(--accent);color:#030712;
   padding:14px 30px;border-radius:3px;
   font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;
   text-decoration:none;letter-spacing:0.05em;
   position:relative;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;
-  border:none;cursor:none;
+  border:none;
 }
 .btn-primary::before{
   content:'';position:absolute;inset:0;
@@ -159,7 +178,6 @@ nav{
   font-family:'Syne',sans-serif;font-weight:600;font-size:0.9rem;
   text-decoration:none;letter-spacing:0.05em;
   transition:border-color 0.2s,color 0.2s,transform 0.2s;
-  cursor:none;
 }
 .btn-secondary:hover{
   border-color:var(--accent2);color:var(--accent2);
@@ -201,7 +219,7 @@ nav{
 }
 .stat:last-child{border-right:none}
 .stat-num{
-  font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:800;
+  font-family:'Syne',sans-serif;font-size:2.4rem;font-weight:800;
   color:var(--accent);display:block;margin-bottom:4px;
 }
 .stat-label{
@@ -210,7 +228,7 @@ nav{
 }
 
 /* ─── SECTIONS ─── */
-section{padding:100px 60px}
+section{padding:100px 60px;position:relative}
 .section-label{
   font-family:'DM Mono',monospace;font-size:0.72rem;
   color:var(--accent);letter-spacing:0.25em;text-transform:uppercase;
@@ -233,7 +251,7 @@ section{padding:100px 60px}
 
 /* ─── ABOUT ─── */
 #about{background:var(--bg2)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center}
 .about-text p{
   font-size:1.05rem;line-height:1.85;color:rgba(232,237,248,0.8);
   margin-bottom:20px;
@@ -262,10 +280,121 @@ section{padding:100px 60px}
 .tl-text{font-size:0.9rem;color:var(--muted);line-height:1.5}
 .tl-text strong{color:var(--text)}
 
+/* ─── COMPETENCY (NEW) ─── */
+#competency{background:var(--bg)}
+.competency-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 40px;
+}
+.pyramid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.pyramid-level {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 52px;
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+.pyramid-level span {
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s;
+}
+.pyramid-level-1 { width: 40%; border-radius: 4px 4px 0 0; background: linear-gradient(135deg, rgba(0, 245, 200, 0.15), rgba(139, 92, 246, 0.15)); border-color: rgba(0, 245, 200, 0.3); }
+.pyramid-level-2 { width: 55%; background: linear-gradient(135deg, rgba(0, 245, 200, 0.12), rgba(139, 92, 246, 0.12)); border-color: rgba(0, 245, 200, 0.25); }
+.pyramid-level-3 { width: 70%; background: linear-gradient(135deg, rgba(0, 245, 200, 0.09), rgba(139, 92, 246, 0.09)); border-color: rgba(0, 245, 200, 0.2); }
+.pyramid-level-4 { width: 85%; background: linear-gradient(135deg, rgba(0, 245, 200, 0.06), rgba(139, 92, 246, 0.06)); }
+.pyramid-level-5 { width: 100%; border-radius: 0 0 4px 4px; background: rgba(15, 23, 42, 0.5); }
+
+.pyramid-level::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 245, 200, 0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: 1;
+}
+.pyramid-level:hover::after {
+  transform: translateX(100%);
+}
+.pyramid-level.active {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 245, 200, 0.15), var(--glow);
+  border-color: var(--accent);
+}
+.pyramid-level.active span {
+  color: var(--accent);
+}
+
+.pyramid-details-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 30px;
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.details-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--accent3);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: rgba(245, 158, 11, 0.05);
+  padding: 4px 10px;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+#pyramid-details-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+#pyramid-details-text {
+  font-size: 0.95rem;
+  color: rgba(232, 237, 248, 0.8);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
 /* ─── SKILLS ─── */
-#skills{background:var(--bg)}
+#skills{background:var(--bg2)}
 .skills-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:20px;
 }
 .skill-card{
@@ -305,30 +434,39 @@ section{padding:100px 60px}
 .skill-tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{
   font-family:'DM Mono',monospace;font-size:0.68rem;
-  color:var(--muted);background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.07);
+  color:var(--muted);background:rgba(255, 255, 255, 0.03);
+  border:1px solid rgba(255, 255, 255, 0.06);
   padding:4px 10px;border-radius:2px;
   letter-spacing:0.05em;
   transition:color 0.2s,border-color 0.2s,background 0.2s;
 }
-.skill-card:hover .tag{
+.skill-card:hover .tag, .pyramid-details-panel .tag{
   color:var(--accent);
   border-color:rgba(0,245,200,0.2);
   background:rgba(0,245,200,0.05);
 }
 
 /* ─── EXPERIENCE ─── */
-#experience{background:var(--bg2)}
+#experience{background:var(--bg)}
+.experience-container{
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+  max-width:960px;
+}
 .exp-card{
   background:var(--panel);border:1px solid var(--border);
   border-radius:6px;padding:48px;
   position:relative;overflow:hidden;
-  max-width:900px;
+  transition:transform 0.3s,border-color 0.3s;
+}
+.exp-card:hover{
+  border-color:rgba(0,245,200,0.2);
 }
 .exp-card::after{
   content:'';position:absolute;right:-60px;top:-60px;
   width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(123,94,248,0.08),transparent 70%);
+  background:radial-gradient(circle,rgba(139,92,246,0.08),transparent 70%);
 }
 .exp-badge{
   display:inline-flex;align-items:center;gap:10px;
@@ -336,6 +474,10 @@ section{padding:100px 60px}
   padding:6px 16px;border-radius:2px;margin-bottom:24px;
   font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);
   letter-spacing:0.1em;
+}
+.exp-badge.recent{
+  background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);
+  color:var(--accent3);
 }
 .exp-title{
   font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;
@@ -355,13 +497,15 @@ section{padding:100px 60px}
 }
 
 /* ─── PROJECTS ─── */
-#projects{background:var(--bg)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:24px}
 .proj-card{
   background:var(--panel);border:1px solid var(--border);
   border-radius:6px;overflow:hidden;
   transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
   opacity:0;transform:translateY(40px);
+  display:flex;
+  flex-direction:column;
 }
 .proj-card.visible{animation:cardIn 0.6s forwards}
 .proj-card:hover{
@@ -375,7 +519,7 @@ section{padding:100px 60px}
 }
 .proj-num{
   font-family:'Syne',sans-serif;font-size:3.5rem;font-weight:800;
-  color:rgba(0,245,200,0.06);position:absolute;right:24px;top:16px;
+  color:rgba(0,245,200,0.05);position:absolute;right:24px;top:16px;
   line-height:1;user-select:none;
 }
 .proj-cat{
@@ -388,7 +532,7 @@ section{padding:100px 60px}
   margin-bottom:8px;
 }
 .proj-sub{font-size:0.82rem;color:var(--muted);margin-bottom:16px;font-style:italic}
-.proj-body{padding:0 28px 28px}
+.proj-body{padding:0 28px 28px;display:flex;flex-direction:column;flex-grow:1;justify-content:space-between}
 .proj-desc{
   font-size:0.88rem;color:rgba(232,237,248,0.7);
   line-height:1.65;margin-bottom:16px;
@@ -396,7 +540,7 @@ section{padding:100px 60px}
 .proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
 .stack-tag{
   font-family:'DM Mono',monospace;font-size:0.65rem;
-  background:rgba(123,94,248,0.12);border:1px solid rgba(123,94,248,0.2);
+  background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.18);
   color:rgba(180,160,255,0.9);padding:3px 10px;border-radius:2px;
   letter-spacing:0.05em;
 }
@@ -406,6 +550,7 @@ section{padding:100px 60px}
   color:var(--accent);text-decoration:none;letter-spacing:0.08em;
   border-bottom:1px solid rgba(0,245,200,0.3);padding-bottom:2px;
   transition:border-color 0.2s;
+  align-self:flex-start;
 }
 .proj-link:hover{border-color:var(--accent)}
 .proj-link-none{
@@ -414,9 +559,9 @@ section{padding:100px 60px}
 }
 
 /* ─── HONORS ─── */
-#honors{background:var(--bg2)}
+#honors{background:var(--bg)}
 .honors-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
   gap:16px;
 }
 .honor-card{
@@ -429,7 +574,7 @@ section{padding:100px 60px}
 .honor-card.visible{animation:cardIn 0.5s forwards}
 .honor-card:hover{
   transform:translateY(-5px);
-  border-color:rgba(245,166,35,0.3);
+  border-color:rgba(245,158,11,0.3);
 }
 .honor-icon{font-size:2rem;margin-bottom:12px;display:block}
 .honor-text{
@@ -439,7 +584,7 @@ section{padding:100px 60px}
 
 /* ─── CONTACT ─── */
 #contact{
-  background:var(--bg);
+  background:var(--bg2);
   text-align:center;
   position:relative;overflow:hidden;
 }
@@ -475,7 +620,6 @@ section{padding:100px 60px}
   font-family:'DM Mono',monospace;font-size:0.78rem;
   color:var(--text);text-decoration:none;
   transition:border-color 0.2s,color 0.2s,transform 0.2s;
-  cursor:none;
 }
 .contact-card:hover{
   border-color:var(--accent);color:var(--accent);
@@ -491,7 +635,7 @@ section{padding:100px 60px}
   text-decoration:none;letter-spacing:0.06em;
   position:relative;overflow:hidden;
   transition:transform 0.2s,box-shadow 0.2s;
-  cursor:none;border:none;
+  border:none;
 }
 .btn-contact::before{
   content:'';position:absolute;inset:0;
@@ -499,7 +643,7 @@ section{padding:100px 60px}
 }
 .btn-contact:hover{
   transform:translateY(-3px) scale(1.02);
-  box-shadow:0 15px 50px rgba(123,94,248,0.4),0 0 0 1px rgba(0,245,200,0.3);
+  box-shadow:0 15px 50px rgba(139,92,246,0.4),0 0 0 1px rgba(0,245,200,0.3);
 }
 .pulse-ring{
   position:absolute;inset:-8px;border-radius:6px;
@@ -517,13 +661,14 @@ footer{
   padding:24px 60px;
   display:flex;justify-content:space-between;align-items:center;
   position:relative;z-index:2;
+  background:var(--bg);
 }
 .footer-left{
   font-family:'DM Mono',monospace;font-size:0.7rem;
   color:var(--muted);letter-spacing:0.1em;
 }
 .footer-right{
-  font-family:'DM Mono',monospace;font-size:0.7rem;
+  font-family:'DM Mono',monospace;font-size:0.7.2rem;
   color:var(--muted);
 }
 .footer-right span{color:var(--accent)}
@@ -566,14 +711,20 @@ footer{
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* ─── MOBILE ─── */
+@media(max-width:992px){
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .competency-grid { grid-template-columns: 1fr; gap: 30px; padding: 24px; }
+}
+
 @media(max-width:768px){
   nav{padding:18px 24px}
   .nav-links{display:none}
-  #hero{padding:100px 24px 60px}
+  #hero{padding:120px 24px 60px}
   section{padding:70px 24px}
   .stats-strip{margin:0 24px;flex-wrap:wrap}
   .stat{min-width:50%;border-right:none;border-bottom:1px solid var(--border)}
-  .about-grid{grid-template-columns:1fr}
+  .stat:nth-child(even){border-left:1px solid var(--border)}
+  .stat:nth-child(3), .stat:nth-child(4){border-bottom:none}
   footer{padding:20px 24px;flex-direction:column;gap:8px;text-align:center}
 }
 
@@ -609,9 +760,10 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">SR</div>
+  <a href="#" class="nav-logo">SR</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
+    <li><a href="#competency">Competency</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -628,11 +780,11 @@ footer{
       <span class="line2">RAM R.</span>
     </h1>
     <p class="hero-title">
-      <strong>AI & ML Engineer</strong> · B.Tech Computing & Data Science (3rd Year)<br>
-      Building intelligent systems at the intersection of Computer Vision, LLMs, and Real-World Automation.
+      <strong>AI Solutions Architect & Systems Engineer</strong> · B.Tech Computing & Data Science (Final Year)<br>
+      Architecting enterprise-grade AI applications, on-premise LLM integrations, and multi-stage RAG pipelines.
     </p>
     <div class="hero-ctas">
-      <a href="Resume_Mar_2026.pdf" download="Sundar_Ram_Resume.pdf" class="btn-primary">
+      <a href="Resume_June_2026.pdf" download="Sundar_Ram_Resume.pdf" class="btn-primary">
         <span>↓</span> Download Resume
       </a>
       <a href="#projects" class="btn-secondary">
@@ -649,11 +801,11 @@ footer{
 <!-- STATS -->
 <div class="stats-strip">
   <div class="stat">
-    <span class="stat-num" data-target="4">0</span>
-    <span class="stat-label">AI Systems Built</span>
+    <span class="stat-num" data-target="6">0</span>
+    <span class="stat-label">AI Systems Shipped</span>
   </div>
   <div class="stat">
-    <span class="stat-num" data-target="3">0</span>
+    <span class="stat-num" data-target="4">0</span>
     <span class="stat-label">Years in Data Science</span>
   </div>
   <div class="stat">
@@ -661,7 +813,7 @@ footer{
     <span class="stat-label">Revenue Managed (₹)</span>
   </div>
   <div class="stat">
-    <span class="stat-num" data-target="10">0</span>
+    <span class="stat-num" data-target="15">0</span>
     <span class="stat-label">Tech Stack Tools</span>
   </div>
 </div>
@@ -669,35 +821,70 @@ footer{
 <!-- ABOUT -->
 <section id="about">
   <div class="section-label">About Me</div>
-  <h2 class="section-title reveal">Builder. Thinker. <em>AI Architect.</em></h2>
+  <h2 class="section-title reveal">Builder. Thinker. <em>AI Solutions Architect.</em></h2>
   <div class="about-grid">
     <div class="about-text reveal">
-      <p>I'm <strong>Sundar Ram R</strong>, a 3rd year B.Tech student in Computing & Data Science at Sai International University — passionate about building real-world AI systems that actually work.</p>
-      <p>From <strong>Computer Vision pipelines</strong> to <strong>RAG-based document intelligence</strong>, I don't just study AI — I deploy it. My internship at <strong>Flex</strong> (3rd largest electronics manufacturer globally) gave me production-grade experience building end-to-end systems that engineers rely on daily.</p>
-      <p>I also manage a family taxi business generating <strong>₹14L annual revenue</strong>, where I apply data analytics and operational thinking in the real world — not just the classroom.</p>
+      <p>I'm <strong>Sundar Ram R</strong>, a final year B.Tech student in Computing & Data Science at Sai International University — dedicated to building production-grade intelligence platforms that solve actual corporate pain points.</p>
+      <p>From **on-premise RAG configurations** to **multi-stage vision workflows**, I build with structural reliability in mind. My internships at **DMW CNC Solutions** and **Flex** (the 3rd largest electronics manufacturer globally) allowed me to design, build, and deploy production systems serving internal teams daily.</p>
+      <p>In addition to software engineering, I manage operational analytics for a family taxi service generating **₹14L+ annual revenue**, bridging raw mathematical concepts with business logic and bottom-line profitability.</p>
     </div>
     <div class="reveal">
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-year">2019 — 2022</div>
-          <div class="tl-text"><strong>Foundation Years</strong> — Maharishi International Residential School. Managed family taxi business. Developed business analytics thinking.</div>
+          <div class="tl-text"><strong>Foundation Years</strong> — Maharishi International Residential School. Managed family taxi operations and initiated operational data tracking.</div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2022 — 2024</div>
-          <div class="tl-text"><strong>Data Science Phase</strong> — Entered B.Tech. Built ML models, worked on EDA, feature engineering, and core AI/ML fundamentals.</div>
+          <div class="tl-text"><strong>Core Data Science</strong> — Entered B.Tech. Mastered statistical modeling, data pipelines, EDA, and forecasting fundamentals.</div>
         </div>
         <div class="tl-item">
           <div class="tl-year">2024 — 2025</div>
-          <div class="tl-text"><strong>AI/ML Specialization</strong> — Mastered Computer Vision, LLMs, RAG, transformers and deployed production AI pipelines.</div>
+          <div class="tl-text"><strong>Deep Learning & CV</strong> — Implemented RAG nodes, facial mesh coordinates, visual embedding models, and microservice APIs.</div>
         </div>
         <div class="tl-item">
           <div class="tl-year">Summer 2025</div>
-          <div class="tl-text"><strong>Flex Internship</strong> — AI Automation Intern at one of the world's largest electronics manufacturers. Shipped 4 production-grade AI systems.</div>
+          <div class="tl-text"><strong>Flex Internship</strong> — AI Automation Intern. Shipped 4 complete automated pipelines connecting OCR, CV, and commercial APIs.</div>
         </div>
         <div class="tl-item">
-          <div class="tl-year">2025 — Present</div>
-          <div class="tl-text"><strong>3rd Year · Building →</strong> Developing full-stack AI products, contributing to open source, hunting for next big challenge.</div>
+          <div class="tl-year">2026 (Recent)</div>
+          <div class="tl-text"><strong>DMW CNC Solutions Internship</strong> — AI, Digital Transformation & Systems Intern. Architected on-premise Ollama 70B RAG and multi-plant KPI insights engines.</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPETENCY (NEW SECTION) -->
+<section id="competency">
+  <div class="section-label">Expertise Model</div>
+  <h2 class="section-title reveal">Core <em>Competency</em> Hierarchy</h2>
+  <div class="competency-grid reveal">
+    <div class="pyramid-container">
+      <div class="pyramid-level pyramid-level-1" data-level="1">
+        <span>AI Solutions Architect</span>
+      </div>
+      <div class="pyramid-level pyramid-level-2" data-level="2">
+        <span>Enterprise AI & Intelligent Automation</span>
+      </div>
+      <div class="pyramid-level pyramid-level-3" data-level="3">
+        <span>Computer Vision, RAG & LLM Systems</span>
+      </div>
+      <div class="pyramid-level pyramid-level-4" data-level="4">
+        <span>Machine Learning, Analytics & BI</span>
+      </div>
+      <div class="pyramid-level pyramid-level-5" data-level="5">
+        <span>Software Engineering & Data Infrastructure</span>
+      </div>
+    </div>
+    <div class="pyramid-details-panel">
+      <div class="details-badge">🎯 Core Capability Focus</div>
+      <h3 id="pyramid-details-title">AI Solutions Architect</h3>
+      <p id="pyramid-details-text">Hover over the pyramid tiers on the left to inspect detailed engineering competencies.</p>
+      <div class="skill-tags" id="pyramid-details-tags">
+        <!-- Javascript injects tags here -->
       </div>
     </div>
   </div>
@@ -715,8 +902,8 @@ footer{
       <div class="skill-cat">Programming</div>
       <div class="skill-tags">
         <span class="tag">Python</span><span class="tag">C</span><span class="tag">C++</span>
-        <span class="tag">SQL</span><span class="tag">R</span><span class="tag">Next.js</span>
-        <span class="tag">Async/Multithreading</span><span class="tag">Pandas</span><span class="tag">NumPy</span>
+        <span class="tag">SQL</span><span class="tag">Javascript</span><span class="tag">Next.js</span>
+        <span class="tag">Async/Multithreading</span><span class="tag">Data Structures</span><span class="tag">Pandas</span><span class="tag">NumPy</span>
       </div>
     </div>
     <div class="skill-card">
@@ -726,16 +913,16 @@ footer{
         <span class="tag">Machine Learning</span><span class="tag">Deep Learning</span>
         <span class="tag">OpenCV</span><span class="tag">MediaPipe</span>
         <span class="tag">CLIP</span><span class="tag">LLaVA</span><span class="tag">LLaMA</span>
-        <span class="tag">RAG</span><span class="tag">Transformers</span><span class="tag">Embeddings</span>
+        <span class="tag">Ollama 70B</span><span class="tag">RAG</span><span class="tag">Transformers</span><span class="tag">Embeddings</span><span class="tag">AI Agents</span>
       </div>
     </div>
     <div class="skill-card">
       <span class="skill-icon">⚙️</span>
       <div class="skill-cat">Tools & Infrastructure</div>
       <div class="skill-tags">
-        <span class="tag">Gemini API</span><span class="tag">Groq</span><span class="tag">Gradio</span>
+        <span class="tag">Gemini API</span><span class="tag">Groq API</span><span class="tag">Gradio</span>
         <span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">Render</span>
-        <span class="tag">HuggingFace</span><span class="tag">Git</span><span class="tag">Tesseract</span><span class="tag">PyMuPDF</span>
+        <span class="tag">HuggingFace</span><span class="tag">Git</span><span class="tag">Tesseract</span><span class="tag">PyMuPDF</span><span class="tag">Excel to HTML</span>
       </div>
     </div>
     <div class="skill-card">
@@ -743,27 +930,28 @@ footer{
       <div class="skill-cat">Data & Analytics</div>
       <div class="skill-tags">
         <span class="tag">Business Intelligence</span><span class="tag">KPI Analytics</span>
-        <span class="tag">Matplotlib</span><span class="tag">Seaborn</span>
-        <span class="tag">Feature Engineering</span><span class="tag">EDA</span><span class="tag">Prophet</span>
+        <span class="tag">Plotly</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span>
+        <span class="tag">Feature Engineering</span><span class="tag">EDA</span><span class="tag">Prophet</span><span class="tag">Isolation Forest</span>
       </div>
     </div>
     <div class="skill-card">
       <span class="skill-icon">🤝</span>
-      <div class="skill-cat">Leadership & Soft Skills</div>
+      <div class="skill-cat">Leadership & Management</div>
       <div class="skill-tags">
         <span class="tag">Team Leadership</span><span class="tag">Project Management</span>
         <span class="tag">Technical Communication</span><span class="tag">Strategic Planning</span>
-        <span class="tag">Cross-Team Collaboration</span>
+        <span class="tag">Analytical Thinking</span><span class="tag">Cross-Team Collaboration</span>
       </div>
     </div>
     <div class="skill-card">
       <span class="skill-icon">🏆</span>
-      <div class="skill-cat">Certifications</div>
+      <div class="skill-cat">Certifications & Honors</div>
       <div class="skill-tags">
         <span class="tag">Junior CXO / CEO Program</span>
         <span class="tag">Indian National Olympiad</span>
         <span class="tag">Robotics (Base Level)</span>
         <span class="tag">Flex Production Systems</span>
+        <span class="tag">DMW Audit Integration</span>
       </div>
     </div>
   </div>
@@ -775,19 +963,36 @@ footer{
 <section id="experience">
   <div class="section-label">Industry Experience</div>
   <h2 class="section-title reveal">Where I've <em>Shipped</em></h2>
-  <div class="exp-card reveal">
-    <div class="exp-badge">🏭 Summer 2025 · Production AI</div>
-    <div class="exp-title">AI Automation Intern</div>
-    <div class="exp-sub">Flex — 3rd Largest Electronics Manufacturer in the World · Global EMS Company</div>
-    <ul class="exp-list">
-      <li>Built internal AI automation tools for document and workflow processing at enterprise scale</li>
-      <li>Deployed production-grade tools via API-based services and Gradio interfaces used by engineers daily</li>
-      <li>Worked with OpenCV, CLIP, PyMuPDF, Tesseract, Gemini and Groq APIs in a real production environment</li>
-      <li>Integrated OCR, Computer Vision, and LLM components into complete end-to-end automated pipelines</li>
-      <li>Focused on production concerns: reliability, latency, modularity, and real-world usability</li>
-      <li>Collaborated with engineers to iterate on models and continuously improve pipeline performance</li>
-      <li>Designed and deployed 4 complete end-to-end AI systems shipped to production</li>
-    </ul>
+  <div class="experience-container">
+    
+    <!-- E1 (NEW) -->
+    <div class="exp-card reveal">
+      <div class="exp-badge recent">🏭 2026 · Enterprise AI Integration</div>
+      <div class="exp-title">AI, Digital Transformation & Systems Intern</div>
+      <div class="exp-sub">DMW CNC Solutions — Manufacturing & Systems Leader (500+ Employees · ₹400 Cr+ Turnover)</div>
+      <ul class="exp-list">
+        <li>Developed a custom, end-to-end **Internal Audit Management System** from scratch, automating NCR logging, annual planning, checklists, and corrective action workflows.</li>
+        <li>Integrated **Ollama 70B** on enterprise servers, building a secure, local RAG pipeline to query plant data, machinery documentation, audit records, and compliance rules.</li>
+        <li>Built interactive **Plant & Department Analytics Dashboards** providing real-time visibility into NC trends, auditor utilization, and closure rates.</li>
+        <li>Created the **KPI Insights Visualizer**, automating data aggregation across 8+ manufacturing plants (120+ KPIs, 3,000+ data nodes), replacing manual Excel reporting.</li>
+        <li>Programmed compliance safeguards including automatic email alerts to audit coordinators when NC deadlines are breached.</li>
+      </ul>
+    </div>
+
+    <!-- E2 -->
+    <div class="exp-card reveal">
+      <div class="exp-badge">⚙️ Summer 2025 · Production AI</div>
+      <div class="exp-title">AI Automation Intern</div>
+      <div class="exp-sub">Flex — 3rd Largest Electronics Manufacturer in the World · Global EMS Company</div>
+      <ul class="exp-list">
+        <li>Shipped 4 complete production-grade AI systems, automating critical workflows and document extraction at scale.</li>
+        <li>Deployed production services using Gradio UI and REST APIs, optimizing system latency and module reliability.</li>
+        <li>Synthesized multi-model pipelines combining OpenCV, CLIP visual matching, PyMuPDF parsing, and Tesseract OCR.</li>
+        <li>Interfaced local routines with Gemini and Groq API calls, handling large enterprise PDF processing loads.</li>
+        <li>Partnered directly with factory-floor engineers to refine model thresholds and improve real-world data reliability.</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
@@ -799,21 +1004,21 @@ footer{
   <h2 class="section-title reveal">Things I've <em>Built</em></h2>
   <div class="projects-grid">
 
-    <!-- P1 -->
+    <!-- P1 (NEW) -->
     <div class="proj-card">
       <div class="proj-header">
         <div class="proj-num">01</div>
-        <div class="proj-cat">Computer Vision · LLM Reasoning</div>
-        <div class="proj-name">Attention Sense AI</div>
-        <div class="proj-sub">Real-Time Attention Monitoring System</div>
+        <div class="proj-cat">Workflow Automation · Enterprise RAG</div>
+        <div class="proj-name">Audit Flow Manager</div>
+        <div class="proj-sub">Internal Audit Management System (Ollama 70B)</div>
       </div>
       <div class="proj-body">
-        <p class="proj-desc">Real-time face mesh tracking that monitors eye position, head pose, blink rate, and distractions. Fuses multi-signal CV data into unified focus scores with LLM-generated contextual alerts via Gemini/Groq. Deployable in classrooms, meetings, and workplace focus monitoring.</p>
+        <p class="proj-desc">Automated audit lifecycles including checklist compilation, Non-Compliance (NC) tracking, and management review reporting. Features an on-premise RAG model (Ollama 70B) enabling auditors to query local compliance manuals and historical audit databases securely.</p>
         <div class="proj-stack">
-          <span class="stack-tag">MediaPipe</span><span class="stack-tag">OpenCV</span>
-          <span class="stack-tag">Gemini/Groq</span><span class="stack-tag">Gradio</span>
+          <span class="stack-tag">Ollama 70B</span><span class="stack-tag">RAG</span>
+          <span class="stack-tag">FastAPI</span><span class="stack-tag">Workflows</span>
         </div>
-        <span class="proj-link-none">// Private — Production System</span>
+        <span class="proj-link-none">// Enterprise Production System (DMW)</span>
       </div>
     </div>
 
@@ -821,17 +1026,17 @@ footer{
     <div class="proj-card">
       <div class="proj-header">
         <div class="proj-num">02</div>
-        <div class="proj-cat">Multi-Stage Document Intelligence</div>
-        <div class="proj-name">Document Analyzer</div>
-        <div class="proj-sub">Intelligent OCR + Vision + RAG Pipeline</div>
+        <div class="proj-cat">Full-Stack AI Product</div>
+        <div class="proj-name">Supply IQ</div>
+        <div class="proj-sub">AI-Powered Supply Chain Platform</div>
       </div>
       <div class="proj-body">
-        <p class="proj-desc">Multi-stage OCR → Vision → LLM pipeline extracting all content from enterprise documents. Visual element extraction via OpenCV + CLIP isolates signatures, tables, and diagrams. RAG-based Q&A powered by LLaVA + LLaMA — query even inside diagram content.</p>
+        <p class="proj-desc">30-day demand forecasting via Prophet and Isolation Forest anomalies. Indexes contracts via TF-IDF cosine similarity. Generates executive summaries using Groq LLaMA 3.3 70B. Configured with Next.js and FastAPI on Render.</p>
         <div class="proj-stack">
-          <span class="stack-tag">Tesseract OCR</span><span class="stack-tag">PyMuPDF</span>
-          <span class="stack-tag">OpenCV+CLIP</span><span class="stack-tag">LLaVA</span><span class="stack-tag">LLaMA</span>
+          <span class="stack-tag">Prophet</span><span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">LLaMA 3.3</span><span class="stack-tag">Next.js</span>
         </div>
-        <span class="proj-link-none">// Enterprise Production System</span>
+        <a href="https://supply-iq-nu.vercel.app/" target="_blank" class="proj-link">↗ Live Demo</a>
       </div>
     </div>
 
@@ -839,17 +1044,17 @@ footer{
     <div class="proj-card">
       <div class="proj-header">
         <div class="proj-num">03</div>
-        <div class="proj-cat">End-to-End Recruitment Pipeline</div>
-        <div class="proj-name">Resume Flow AI</div>
-        <div class="proj-sub">Intelligent Resume Parsing & Interview System</div>
+        <div class="proj-cat">OCR + Document RAG</div>
+        <div class="proj-name">Document Analyzer</div>
+        <div class="proj-sub">Intelligent Visual Extraction & Query Node</div>
       </div>
       <div class="proj-body">
-        <p class="proj-desc">Extracts skills, experience, projects and gaps from any resume using LLMs. JD-vs-resume fit scoring (out of 10) with detailed gap analysis. Generates personalized interview question sets per candidate. Batch-process multiple resumes, rank by fit, surface best matches.</p>
+        <p class="proj-desc">Multi-stage document extraction (OCR -> Vision -> LLM) isolating diagrams and signatures via OpenCV + CLIP. Supports diagram queries and schematics answering via LLaVA + LLaMA 3.3.</p>
         <div class="proj-stack">
-          <span class="stack-tag">LLM Extraction</span><span class="stack-tag">JD Matching</span>
-          <span class="stack-tag">Fit Scoring</span><span class="stack-tag">Interview Gen</span>
+          <span class="stack-tag">OpenCV+CLIP</span><span class="stack-tag">Tesseract</span>
+          <span class="stack-tag">LLaVA</span><span class="stack-tag">LLaMA</span>
         </div>
-        <a href="https://resumeflow-ai-sable.vercel.app" target="_blank" class="proj-link">↗ Live Demo</a>
+        <span class="proj-link-none">// Enterprise Production System (Flex)</span>
       </div>
     </div>
 
@@ -857,18 +1062,53 @@ footer{
     <div class="proj-card">
       <div class="proj-header">
         <div class="proj-num">04</div>
-        <div class="proj-cat">Full-Stack AI Product</div>
-        <div class="proj-name">Supply IQ</div>
-        <div class="proj-sub">AI-Powered Supply Chain Intelligence Platform</div>
+        <div class="proj-cat">Recruitment AI</div>
+        <div class="proj-name">Resume Flow AI</div>
+        <div class="proj-sub">Intelligent Resume Parsing & Fit Scoring</div>
       </div>
       <div class="proj-body">
-        <p class="proj-desc">30-day demand forecasting via Prophet + Isolation Forest for anomaly detection with risk scoring. RAG-based Contract Intelligence indexes supplier PDFs for business queries. Executive Decision Engine using Groq LLaMA 3.3 70B generating VP-level reports. Production FastAPI + Next.js, deployed on Render.</p>
+        <p class="proj-desc">Extracts skills, project blocks, and employment history. Generates resume-to-JD fit scores out of 10 and curates customized candidate interview queries. Supports parallel batch parsing.</p>
         <div class="proj-stack">
-          <span class="stack-tag">Prophet</span><span class="stack-tag">Isolation Forest</span>
-          <span class="stack-tag">RAG+TF-IDF</span><span class="stack-tag">Groq LLaMA 3.3</span>
-          <span class="stack-tag">FastAPI</span><span class="stack-tag">Next.js</span>
+          <span class="stack-tag">LLM Extraction</span><span class="stack-tag">JD Fit Matching</span>
+          <span class="stack-tag">Batch Parsing</span>
         </div>
-        <a href="https://supply-iqnu.vercel.app/" target="_blank" class="proj-link">↗ Live Demo</a>
+        <a href="https://resumeflow-ai-sable.vercel.app" target="_blank" class="proj-link">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-num">05</div>
+        <div class="proj-cat">Computer Vision</div>
+        <div class="proj-name">Attention Sense AI</div>
+        <div class="proj-sub">Real-Time Attention Monitoring System</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Tracks gaze orientation, blink rate, and face mesh coordinates using MediaPipe. Processes feed values into a unified focus score, generating contextual text alerts using Gemini and Groq.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">MediaPipe</span><span class="stack-tag">OpenCV</span>
+          <span class="stack-tag">Gemini API</span><span class="stack-tag">Gradio</span>
+        </div>
+        <span class="proj-link-none">// Private — Production System</span>
+      </div>
+    </div>
+
+    <!-- P6 (NEW) -->
+    <div class="proj-card">
+      <div class="proj-header">
+        <div class="proj-num">06</div>
+        <div class="proj-cat">Business Intelligence</div>
+        <div class="proj-name">KPI Insights Visualizer</div>
+        <div class="proj-sub">Multi-Plant Operations BI Dashboard</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Consolidates operational data from 8+ plants, transforming Excel workbooks into dynamic HTML widgets. Displays absenteeism, target indicators, and production parameters via Plotly dashboards.</p>
+        <div class="proj-stack">
+          <span class="stack-tag">Plotly</span><span class="stack-tag">Pandas</span>
+          <span class="stack-tag">Excel to HTML</span><span class="stack-tag">Analytics</span>
+        </div>
+        <span class="proj-link-none">// Enterprise Analytics Platform (DMW)</span>
       </div>
     </div>
 
@@ -884,22 +1124,22 @@ footer{
   <div class="honors-grid">
     <div class="honor-card">
       <span class="honor-icon">🏭</span>
-      <div class="honor-text"><strong>Flex Internship</strong>3rd largest electronics manufacturer globally · Production AI systems</div>
+      <div class="honor-text"><strong>DMW Solutions Internship</strong>Enterprise AI integrations, on-premise LLMs, compliance auditing tools</div>
     </div>
     <div class="honor-card">
-      <span class="honor-icon">🤖</span>
-      <div class="honor-text"><strong>4 Production AI Systems</strong>End-to-end pipelines shipped to real engineering teams at Flex</div>
+      <span class="honor-icon">⚙️</span>
+      <div class="honor-text"><strong>Flex Internship</strong>3rd largest electronics manufacturer globally · 4 Production AI systems shipped</div>
     </div>
     <div class="honor-card">
       <span class="honor-icon">💼</span>
-      <div class="honor-text"><strong>₹14L Revenue Managed</strong>Family business operations with data-driven profitability improvements</div>
+      <div class="honor-text"><strong>₹14L Revenue Managed</strong>Family taxi logistics, BI integrations, and revenue optimization modeling</div>
     </div>
     <div class="honor-card">
       <span class="honor-icon">🏅</span>
       <div class="honor-text"><strong>Indian National Olympiad</strong>Academic excellence recognized at national level</div>
     </div>
     <div class="honor-card">
-      <span class="honor-icon">👨‍💼</span>
+      <span class="honor-icon">👨💼</span>
       <div class="honor-text"><strong>Junior CXO · CEO Program</strong>Certified in leadership and executive management</div>
     </div>
     <div class="honor-card">
@@ -919,7 +1159,7 @@ footer{
       Let's Build<br><span>Something</span><br>Together.
     </div>
     <p class="contact-sub reveal">
-      I'm currently a 3rd year student actively looking for internships, research roles, and exciting AI projects. Let's connect.
+      I'm currently looking for full-time opportunities, research fellowships, and challenging enterprise AI projects.
     </p>
     <div class="contact-cards reveal">
       <a href="mailto:sundarpro.csrm@gmail.com" class="contact-card">
@@ -928,11 +1168,11 @@ footer{
       <a href="tel:+917708222597" class="contact-card">
         <span class="ci">📞</span> +91 7708 222 597
       </a>
-      <a href="https://www.linkedin.com/in/sundarr404" target="_blank" class="contact-card">
+      <a href="https://www.linkedin.com/in/sundar-ram-r-755319249" target="_blank" class="contact-card">
         <span class="ci">🔗</span> LinkedIn
       </a>
       <a href="https://instagram.com/ME._.SUNDAR._.R" target="_blank" class="contact-card">
-        <span class="ci">📸</span> @ME._.SUNDAR._.R
+        <span class="ci">📸</span> Instagram
       </a>
     </div>
     <div class="reveal" style="position:relative;display:inline-block">
@@ -946,8 +1186,8 @@ footer{
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-left">SUNDAR RAM R · AI & ML ENGINEER · CHENNAI, INDIA</div>
-  <div class="footer-right">Built with <span>♥</span> · 2025</div>
+  <div class="footer-left">SUNDAR RAM R · AI & SYSTEMS ENGINEER · CHENNAI, INDIA</div>
+  <div class="footer-right">Built with <span>♥</span> · 2026</div>
 </footer>
 
 </div><!-- end .page -->
@@ -958,7 +1198,7 @@ footer{
   const canvas=document.getElementById('canvas-bg');
   const ctx=canvas.getContext('2d');
   let W,H,particles=[],connections=[];
-  const COLORS=['#00f5c8','#7b5ef8','#f5a623'];
+  const COLORS=['#00f5c8','#8b5cf6','#f59e0b'];
 
   function resize(){
     W=canvas.width=window.innerWidth;
@@ -972,11 +1212,11 @@ footer{
     reset(){
       this.x=Math.random()*W;
       this.y=Math.random()*H;
-      this.vx=(Math.random()-0.5)*0.3;
-      this.vy=(Math.random()-0.5)*0.3;
+      this.vx=(Math.random()-0.5)*0.25;
+      this.vy=(Math.random()-0.5)*0.25;
       this.r=Math.random()*1.5+0.5;
       this.color=COLORS[Math.floor(Math.random()*COLORS.length)];
-      this.alpha=Math.random()*0.6+0.2;
+      this.alpha=Math.random()*0.5+0.2;
     }
     update(){
       this.x+=this.vx;this.y+=this.vy;
@@ -992,7 +1232,7 @@ footer{
     }
   }
 
-  for(let i=0;i<80;i++)particles.push(new Particle());
+  for(let i=0;i<70;i++)particles.push(new Particle());
 
   function drawConnections(){
     for(let i=0;i<particles.length;i++){
@@ -1026,6 +1266,9 @@ footer{
   const cur=document.getElementById('cursor');
   const ring=document.getElementById('cursor-ring');
   let mx=0,my=0,rx=0,ry=0;
+  
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
   document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
   function animCursor(){
     cur.style.left=mx+'px';cur.style.top=my+'px';
@@ -1034,7 +1277,8 @@ footer{
     requestAnimationFrame(animCursor);
   }
   animCursor();
-  document.querySelectorAll('a,button,.skill-card,.proj-card,.honor-card').forEach(el=>{
+  
+  document.querySelectorAll('a,button,.skill-card,.proj-card,.honor-card,.pyramid-level').forEach(el=>{
     el.addEventListener('mouseenter',()=>{
       cur.style.width='20px';cur.style.height='20px';
       ring.style.width='50px';ring.style.height='50px';ring.style.opacity='0.8';
@@ -1054,27 +1298,27 @@ footer{
         e.target.classList.add('visible');
       }
     });
-  },{threshold:0.12});
+  },{threshold:0.1});
 
-  document.querySelectorAll('.reveal,.skill-card,.proj-card,.honor-card,.tl-item,.exp-list li').forEach(el=>{
+  document.querySelectorAll('.reveal,.skill-card,.proj-card,.honor-card,.tl-item,.exp-list li,.exp-card').forEach(el=>{
     observer.observe(el);
   });
 
-  // stagger cards
+  // stagger delay configurations
   document.querySelectorAll('.skill-card').forEach((el,i)=>{
-    el.style.transitionDelay=(i*0.08)+'s';
+    el.style.transitionDelay=(i*0.06)+'s';
   });
   document.querySelectorAll('.proj-card').forEach((el,i)=>{
-    el.style.transitionDelay=(i*0.1)+'s';
+    el.style.transitionDelay=(i*0.08)+'s';
   });
   document.querySelectorAll('.honor-card').forEach((el,i)=>{
-    el.style.transitionDelay=(i*0.07)+'s';
+    el.style.transitionDelay=(i*0.06)+'s';
   });
   document.querySelectorAll('.exp-list li').forEach((el,i)=>{
-    el.style.transitionDelay=(i*0.1)+'s';
+    el.style.transitionDelay=(i*0.08)+'s';
   });
   document.querySelectorAll('.tl-item').forEach((el,i)=>{
-    el.style.transitionDelay=(i*0.12)+'s';
+    el.style.transitionDelay=(i*0.1)+'s';
   });
 })();
 
@@ -1086,12 +1330,12 @@ footer{
       if(e.isIntersecting){
         const target=+e.target.dataset.target;
         let current=0;
-        const step=target/40;
+        const step=target/45;
         const t=setInterval(()=>{
           current=Math.min(current+step,target);
           e.target.textContent=Math.floor(current);
           if(current>=target)clearInterval(t);
-        },30);
+        },25);
         obs.unobserve(e.target);
       }
     });
@@ -1099,10 +1343,72 @@ footer{
   counters.forEach(c=>obs.observe(c));
 })();
 
-/* ─── TYPING EFFECT ─── */
+/* ─── PYRAMID INTERACTION ─── */
 (function(){
-  const titles=['AI Engineer','CV Specialist','LLM Developer','RAG Builder','ML Practitioner'];
-  // could add to hero if needed
+  const levels = document.querySelectorAll('.pyramid-level');
+  const detailsTitle = document.getElementById('pyramid-details-title');
+  const detailsText = document.getElementById('pyramid-details-text');
+  const detailsTags = document.getElementById('pyramid-details-tags');
+  
+  const competencyData = {
+    1: {
+      title: "AI Solutions Architect",
+      desc: "Engineering enterprise-grade architectural patterns. Focused on orchestrating complex data flows, setting modular service APIs, and selecting the optimal combination of commercial APIs and on-premise infrastructure for reliable corporate deployment.",
+      tags: ["Systems Architecture", "API Orchestration", "Design Patterns", "Scalability Optimization", "Latency Control"]
+    },
+    2: {
+      title: "Enterprise AI & Intelligent Automation",
+      desc: "Replacing legacy processing protocols with intelligent automation workflows. Experienced in deploying local large language models (Ollama 70B) behind corporate firewalls to parse audit metrics, checklists, and compliance requirements.",
+      tags: ["Workflow Automation", "On-Premise LLMs", "Compliance Systems", "NCR Management", "Local Security"]
+    },
+    3: {
+      title: "Computer Vision, RAG & LLM Systems",
+      desc: "Building multi-modal retrieval pipelines and sensory networks. Experienced in tracking face meshes (MediaPipe), configuring Retrieval-Augmented Generation (RAG) databases (CLIP/LLaVA), and processing document assets.",
+      tags: ["Computer Vision", "RAG Pipeline Setup", "MediaPipe Coordinates", "CLIP Image Matching", "LLaVA Multi-Modal"]
+    },
+    4: {
+      title: "Machine Learning, Analytics & Business Intelligence",
+      desc: "Transforming raw operations logs into actionable intelligence. Proficient in demand forecasting (Prophet), outlier isolation (Isolation Forest), automated KPI aggregation across multiple locations, and customized Plotly dashboards.",
+      tags: ["Predictive Modeling", "Anomaly Detection", "Automated KPI Math", "Interactive Dashboards", "BI Reporting"]
+    },
+    5: {
+      title: "Software Engineering & Data Infrastructure",
+      desc: "The programmatic foundation of modern analytics. Writing clean, multi-threaded asynchronous Python, lightweight C/C++ utilities, and structural SQL queries. Setting up containerized microservices using Docker and Render.",
+      tags: ["Asynchronous Python", "C/C++ Libraries", "Next.js & FastAPI", "Docker Containerization", "Database Optimization"]
+    }
+  };
+
+  levels.forEach(level => {
+    // Add mouseenter or click (helps with mobile interaction too)
+    const triggerEvent = () => {
+      const idx = level.dataset.level;
+      if (competencyData[idx]) {
+        levels.forEach(l => l.classList.remove('active'));
+        level.classList.add('active');
+
+        // Update details
+        detailsTitle.textContent = competencyData[idx].title;
+        detailsText.textContent = competencyData[idx].desc;
+        
+        // Populate tags
+        detailsTags.innerHTML = '';
+        competencyData[idx].tags.forEach(t => {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = t;
+          detailsTags.appendChild(span);
+        });
+      }
+    };
+    
+    level.addEventListener('mouseenter', triggerEvent);
+    level.addEventListener('click', triggerEvent);
+  });
+  
+  // Initialize first tier details
+  if(levels.length > 0) {
+    levels[0].dispatchEvent(new Event('mouseenter'));
+  }
 })();
 
 /* ─── SMOOTH NAV ─── */
