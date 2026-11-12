@@ -33,6 +33,7 @@
   --f-b:'IBM Plex Sans',system-ui,sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
   --gut:clamp(20px,6vw,96px);
+  --z:.86;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{background:var(--bp)}
@@ -114,7 +115,8 @@ nav>*{pointer-events:auto}
 @media(max-width:900px){.links a:not(.cta){display:none}nav{padding:16px 18px 0}.logo small{display:none}}
 
 /* ---------- layout primitives ---------- */
-main{position:relative;z-index:10}
+main{position:relative;z-index:10;zoom:var(--z)}
+footer{zoom:var(--z)}
 section{position:relative;padding:18vh var(--gut)}
 .sheet-tag{font-family:var(--f-m);font-size:12px;letter-spacing:.24em;color:var(--hi);display:flex;align-items:center;gap:12px;margin-bottom:22px;width:fit-content;max-width:100%;background:var(--plate);border:1px solid var(--line-3);padding:7px 14px 7px 12px}
 .plate{background:var(--plate);border:1px solid var(--line-3);padding:clamp(16px,2vw,26px) clamp(18px,2.2vw,30px);position:relative}
@@ -132,7 +134,7 @@ section{position:relative;padding:18vh var(--gut)}
 @media(max-width:900px){section{padding:14vh 20px}.half,.half.r{width:100%;margin:0}}
 
 /* ---------- hero ---------- */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:7vh}
+#hero{min-height:calc(100vh / var(--z));display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:7vh}
 .hero-name{font-family:var(--f-d);font-weight:700;font-size:clamp(68px,10.4vw,170px);line-height:.84;letter-spacing:-.005em;
   color:transparent;-webkit-text-stroke:2px var(--ink);
   background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 0/0% 100%;-webkit-background-clip:text;background-clip:text}
@@ -182,18 +184,22 @@ section{position:relative;padding:18vh var(--gut)}
 
 /* ---------- revisions ---------- */
 .revtable{position:relative;margin-top:50px;border:1px solid var(--line-2);background:var(--panel)}
-.rev{display:grid;grid-template-columns:90px 150px 1fr;border-top:1px solid var(--line-3);position:relative}
+.rev{display:grid;grid-template-columns:170px 1fr;align-items:center;border-top:1px solid var(--line-3);position:relative}
 .rev:first-child{border-top:0}
-.rev>*{padding:18px 18px}
+.rev>*{padding:22px 22px}
+.rev .ag{border-right:1px solid var(--line-3);align-self:stretch;display:flex;flex-direction:column;justify-content:center}
+.rev .ag span{font-family:var(--f-m);font-size:11px;letter-spacing:.3em;color:var(--dim)}
+.rev .ag b{font-family:var(--f-d);font-weight:700;font-size:76px;line-height:.9;color:var(--hi)}
+.rev .ag em{font-style:normal;font-family:var(--f-m);font-size:12px;letter-spacing:.1em;color:var(--soft);margin-top:8px}
 .rev .rn{font-family:var(--f-m);font-size:13px;color:var(--hi);border-right:1px solid var(--line-3)}
 .rev .rd{font-family:var(--f-m);font-size:12px;letter-spacing:.08em;color:var(--dim);border-right:1px solid var(--line-3)}
-.rev h3{font-family:var(--f-d);font-size:26px;font-weight:700;letter-spacing:.02em;line-height:1.1;margin-bottom:4px}
-.rev p{font-size:15px;color:var(--soft)}
+.rev h3{font-family:var(--f-d);font-size:30px;font-weight:700;letter-spacing:.02em;line-height:1.1;margin-bottom:4px}
+.rev p{font-size:16.5px;color:var(--soft)}
 .rev::after{content:'';position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--hi);transform:scaleX(0);transform-origin:left}
 .rev.on::after{transform:scaleX(1);transition:transform 1.2s var(--ease)}
 .rev.now{background:rgba(255,210,63,.07)}
-.rev.now h3::after{content:'CURRENT';font-family:var(--f-m);font-size:10px;letter-spacing:.2em;color:var(--bp-night);background:var(--hi);padding:3px 7px;margin-left:12px;vertical-align:5px}
-@media(max-width:700px){.rev{grid-template-columns:70px 1fr}.rev .rd{border-right:0}.rev>div:last-child{grid-column:1/-1;border-top:1px dashed var(--line-3)}}
+.rev.now h3::after{content:'NOW';font-family:var(--f-m);font-size:10px;letter-spacing:.2em;color:var(--bp-night);background:var(--hi);padding:3px 7px;margin-left:12px;vertical-align:5px}
+@media(max-width:700px){.rev{grid-template-columns:104px 1fr}.rev>*{padding:16px 14px}.rev .ag b{font-size:52px}}
 
 /* ---------- field record ---------- */
 .cards{display:grid;gap:30px;margin-top:50px}
@@ -237,7 +243,7 @@ section{position:relative;padding:18vh var(--gut)}
 .sh-top{display:flex;justify-content:space-between;font-family:var(--f-m);font-size:11px;letter-spacing:.18em;color:var(--dim);border-bottom:1px solid var(--line-2);padding-bottom:10px;margin-bottom:18px}
 .sh-top b{color:var(--hi);font-weight:600}
 .sheet h3{font-family:var(--f-d);font-size:clamp(28px,2.7vw,40px);font-weight:700;line-height:1;letter-spacing:.01em;margin-bottom:6px}
-.sheet .cat{font-family:var(--f-m);font-size:11.5px;letter-spacing:.1em;color:var(--soft);margin-bottom:16px}
+.sheet .cat{font-family:var(--f-m);font-size:12px;letter-spacing:.08em;color:var(--hi);margin-bottom:16px;line-height:1.5}
 .pipe{margin:4px 0 18px;border:1px dashed var(--line-2);padding:10px}
 .pipe svg{width:100%;height:auto;overflow:visible}
 .pipe .bx,.pipe .ar{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1s var(--ease)}
@@ -333,18 +339,14 @@ body.grabbing{user-select:none;-webkit-user-select:none}
 .bom-r.hot{background:rgba(255,210,63,.14)}
 /* ---------- BOM ---------- */
 .bom{position:relative;margin-top:18px;border:1px solid var(--line-2);background:var(--panel);font-size:14.5px}
-.bom-h,.bom-r{display:grid;grid-template-columns:52px 150px 1fr 52px}
-.bom-h{font-family:var(--f-m);font-size:10.5px;letter-spacing:.2em;color:var(--dim);border-bottom:1px solid var(--line-2)}
-.bom-h>*,.bom-r>*{padding:14px 12px;border-right:1px solid var(--line-3)}
-.bom-h>*:last-child,.bom-r>*:last-child{border-right:0;text-align:right}
-.bom-r{border-bottom:1px solid var(--line-3);transition:background .3s}
+.bom-r{display:grid;grid-template-columns:210px 1fr;border-bottom:1px solid var(--line-3);transition:background .3s}
 .bom-r:last-child{border-bottom:0}
 .bom-r:hover{background:rgba(255,210,63,.08)}
-.bom-r .no{font-family:var(--f-m);color:var(--hi)}
-.bom-r .pt{font-family:var(--f-d);font-size:19px;font-weight:700;letter-spacing:.02em;line-height:1.2}
-.bom-r .sp{color:var(--soft)}
-.bom-r .q{font-family:var(--f-m);color:var(--hi)}
-@media(max-width:700px){.bom-h{display:none}.bom-r{grid-template-columns:44px 1fr}.bom-r .sp{grid-column:1/-1;border-top:1px dashed var(--line-3)}.bom-r .q{display:none}.bom-r>*{border-right:0}}
+.bom-r .pt{font-family:var(--f-d);font-size:24px;font-weight:700;letter-spacing:.02em;line-height:1.15;padding:24px 20px;border-right:1px solid var(--line-3);color:var(--hi)}
+.bom-r .sk{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px 26px;padding:26px 24px;font-size:16.5px;color:var(--ink)}
+.bom-r .sk li{position:relative;padding-left:18px;line-height:1.35}
+.bom-r .sk li::before{content:'';position:absolute;left:0;top:.5em;width:7px;height:7px;background:var(--hi)}
+@media(max-width:700px){.bom-r{grid-template-columns:1fr}.bom-r .pt{border-right:0;padding:18px 16px 0}.bom-r .sk{padding:14px 16px 20px;grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
 
 /* ---------- certs & education ---------- */
 .cert-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:44px}
@@ -358,7 +360,7 @@ body.grabbing{user-select:none;-webkit-user-select:none}
 .edu .cert .yr{font-family:var(--f-m);font-size:12px;color:var(--hi);letter-spacing:.12em}
 
 /* ---------- sign-off ---------- */
-#signoff{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+#signoff{min-height:calc(100vh / var(--z));display:flex;flex-direction:column;justify-content:center}
 .so-big{font-family:var(--f-d);font-weight:700;text-transform:uppercase;font-size:clamp(56px,10.5vw,170px);line-height:.88;
   color:transparent;-webkit-text-stroke:1.5px var(--ink);background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 0/0% 100%;-webkit-background-clip:text;background-clip:text}
 .so-big .y{color:transparent;-webkit-text-stroke-color:var(--hi);background:linear-gradient(var(--hi),var(--hi)) no-repeat 0 0/0% 100%;-webkit-background-clip:text;background-clip:text}
@@ -381,6 +383,7 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
   *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
   #scan{display:none}
 }
+@media(max-width:700px){:root{--z:1}}
 </style>
 </head>
 <body class="loading">
@@ -390,16 +393,11 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 <canvas id="bg9" aria-hidden="true"></canvas>
 <canvas id="cad" aria-hidden="true"></canvas>
 <div id="callouts" aria-hidden="true"><svg id="co-svg"></svg></div>
-<div id="cutlabel" aria-hidden="true">SECTION A–A · SCALE 1:1</div>
+<div id="cutlabel" aria-hidden="true">CUT-AWAY VIEW</div>
 
 <div id="frame" aria-hidden="true">
   <div class="zones t"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
   <div id="pmark"></div>
-</div>
-<div id="hudblock" aria-hidden="true">
-  <div id="hud-sheet"><em>SHEET</em><b>01</b> / 08</div>
-  <div><b id="hud-title">GENERAL ARRANGEMENT</b></div>
-  <div><b id="hud-y">000.0</b> %</div>
 </div>
 
 <canvas id="ruler" aria-hidden="true"></canvas>
@@ -413,10 +411,10 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 
 <nav>
   <div class="links">
-    <a href="#overview">NOTES</a>
-    <a href="#field">RECORD</a>
-    <a href="#sheets">SHEETS</a>
-    <a href="#bom">STACK</a>
+    <a href="#overview">ABOUT</a>
+    <a href="#field">EXPERIENCE</a>
+    <a href="#sheets">PROJECTS</a>
+    <a href="#bom">SKILLS</a>
     <a href="#signoff" class="cta">CONTACT</a>
   </div>
 </nav>
@@ -425,7 +423,6 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 
 <!-- ============ 01 GENERAL ARRANGEMENT ============ -->
 <section id="hero" data-kf="hero" data-sheet="01" data-title="GENERAL ARRANGEMENT">
-  <div class="sheet-tag">DWG NO. SRR-2027 · SHEET 01 / 08 · SCALE 1:1</div>
   <h1 class="hero-name" aria-label="Sundar Ram R"><span>SUNDAR</span><span>RAM R</span></h1>
   <div class="plate hero-plate">
   <div class="role" aria-live="polite">&gt;_ <b id="role"></b><i></i></div>
@@ -441,15 +438,13 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
     <div class="stat"><div class="dl"><i></i></div><b><span data-count="147">0</span></b><span>clause-wise audit checklists</span></div>
     <div class="stat"><div class="dl"><i></i></div><b><span data-count="112">0</span><small>K+</small></b><span>ERP invoice lines reconciled</span></div>
   </div>
-  <div class="assy">ASSY-01 · SPINDLE UNIT<br>SCROLL TO DISASSEMBLE ↓<br><b style="color:var(--hi);font-weight:500">DRAG EMPTY SPACE TO ROTATE ⟲</b></div>
   <div class="scroll-cue">SCROLL<i></i></div>
 </section>
 
 <!-- ============ 02 OVERVIEW ============ -->
 <section id="overview" data-kf="overview" data-sheet="02" data-title="GENERAL NOTES">
   <div class="half">
-    <div class="sheet-tag">SHEET 02 · GENERAL NOTES</div>
-    <h2 class="ink sm">Over&shy;view</h2>
+    <h2 class="ink sm">About me</h2>
     <div class="plate pf" style="margin-top:34px">
     <p class="lead rv">B.Tech in <b style="color:#fff">Computing &amp; Data Science</b> at Sai University, Chennai — final year, open to internships now and full-time AI / ML roles after graduation.</p>
     <p class="lead rv" style="margin-top:16px">Two industry internships — <b style="color:#fff">Flex</b> (2025) and <b style="color:#fff">DMW CNC Solutions</b> (2026) — where I built audit systems, KPI dashboards and on-prem AI that replaced Excel sheets and manual document reading. I started out running the numbers of my family's taxi business at 16; now I build software that plant, quality, finance and HR teams use.</p>
@@ -459,7 +454,7 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       <li class="rv"><span>Delivered <b>8 internal applications for DMW in 2026</b>: five during the internship and three more afterwards, alongside college.</span></li>
       <li class="rv"><span>Built for a precision manufacturer with <b>8 plants and 13 departments</b>: 147 clause-wise audit checklists and 112,000+ ERP invoice lines reconciled.</span></li>
     </ol>
-    <div class="hint rv">↗ EXPLODED VIEW: WHAT I BUILD WITH</div>
+    <div class="hint rv">↗ EACH PART OF THE MACHINE IS ONE OF MY SKILLS</div>
     </div>
   </div>
 </section>
@@ -467,16 +462,15 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 <!-- ============ 03 REVISION HISTORY ============ -->
 <section id="revisions" data-kf="revisions" data-sheet="03" data-title="REVISION HISTORY">
   <div class="half r">
-    <div class="sheet-tag">SHEET 03 · REVISION HISTORY</div>
-    <h2 class="ink sm">Revisions</h2>
-    <div class="revtable pf dmx" role="table" aria-label="Revision history">
-      <div class="rev" role="row"><div class="rn">REV 00</div><div class="rd">AGE 16</div><div><h3>Business operator</h3><p>Ran the numbers for the family taxi business — fleet, costs, profitability — on ₹14L+ annual revenue.</p></div></div>
-      <div class="rev" role="row"><div class="rn">REV 01</div><div class="rd">2023</div><div><h3>Data science foundation</h3><p>B.Tech Computing &amp; Data Science, Sai University. ML, data acquisition, EDA, feature engineering.</p></div></div>
-      <div class="rev" role="row"><div class="rn">REV 02</div><div class="rd">JUN–JUL 2025</div><div><h3>Flex · AI Automation</h3><p>OCR → computer vision → LLM document pipelines at the world's third-largest EMS company.</p></div></div>
-      <div class="rev" role="row"><div class="rn">REV 03</div><div class="rd">JUN–JUL 2026</div><div><h3>DMW CNC · Enterprise AI</h3><p>5 production systems, on-prem 70B LLM with RAG, Letter of Appreciation from the CPO.</p></div></div>
-      <div class="rev" role="row"><div class="rn">REV 04</div><div class="rd">AUG–NOV 2026</div><div><h3>DMW · Continued engagement</h3><p>Sales Analytics, Revenue Pulse and HireLine, built alongside college and now in use at DMW.</p></div></div>
-      <div class="rev" role="row"><div class="rn">REV 05</div><div class="rd">SEP–NOV 2026</div><div><h3>Oracle certified ×2</h3><p>OCI AI Foundations Associate (1Z0-1122) and Agentic AI Foundations Associate (1Z0-1157).</p></div></div>
-      <div class="rev now" role="row"><div class="rn">REV 06</div><div class="rd">NOW</div><div><h3>Next revision</h3><p>Open to AI / ML and data science internships now, full-time after graduation.</p></div></div>
+    <h2 class="ink sm">My journey</h2>
+    <div class="revtable pf dmx" role="table" aria-label="My journey by age">
+      <div class="rev" role="row"><div class="ag"><span>AGE</span><b>16</b></div><div><h3>Business operator</h3><p>Ran the numbers for the family taxi business — fleet, costs, profitability — on ₹14L+ annual revenue.</p></div></div>
+      <div class="rev" role="row"><div class="ag"><span>AGE</span><b>17</b><em>2023</em></div><div><h3>Data science foundation</h3><p>B.Tech Computing &amp; Data Science, Sai University. ML, data acquisition, EDA, feature engineering.</p></div></div>
+      <div class="rev" role="row"><div class="ag"><span>AGE</span><b>19</b><em>JUN – JUL 2025</em></div><div><h3>Flex · AI Automation</h3><p>OCR → computer vision → LLM document pipelines at the world's third-largest EMS company.</p></div></div>
+      <div class="rev" role="row"><div class="ag"><span>AGE</span><b>20</b><em>JUN – JUL 2026</em></div><div><h3>DMW CNC · Enterprise AI</h3><p>5 production systems, on-prem 70B LLM with RAG, Letter of Appreciation from the CPO.</p></div></div>
+      <div class="rev" role="row"><div class="ag"><span>AGE</span><b>20</b><em>AUG – NOV 2026</em></div><div><h3>DMW · Continued engagement</h3><p>Sales Analytics, Revenue Pulse and HireLine, built alongside college and now in use at DMW.</p></div></div>
+      <div class="rev" role="row"><div class="ag"><span>AGE</span><b>20</b><em>SEP – NOV 2026</em></div><div><h3>Oracle certified ×2</h3><p>OCI AI Foundations Associate (1Z0-1122) and Agentic AI Foundations Associate (1Z0-1157).</p></div></div>
+      <div class="rev now" role="row"><div class="ag"><span>AGE</span><b>20</b><em>NOW</em></div><div><h3>What's next</h3><p>Open to AI / ML and data science internships now, full-time after graduation.</p></div></div>
     </div>
   </div>
 </section>
@@ -484,7 +478,6 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 <!-- ============ 04 FIELD SERVICE RECORD ============ -->
 <section id="field" data-kf="field" data-sheet="04" data-title="FIELD SERVICE RECORD">
   <div style="max-width:880px">
-    <div class="sheet-tag">SHEET 04 · FIELD SERVICE RECORD</div>
     <h2 class="ink sm">Experience</h2>
     <div class="cards">
       <article class="job panel rv pf dmx">
@@ -531,15 +524,15 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 <!-- ============ 05 PROJECT SHEETS ============ -->
 <section id="sheets" data-kf="sheets" data-sheet="05" data-title="PROJECT SHEETS">
   <div class="sheets-head">
-    <div><div class="sheet-tag">SHEET 05 · PROJECT SHEETS 5.1 – 5.8</div><h2 class="ink sm">The work</h2></div>
+    <div><h2 class="ink sm">Projects</h2></div>
     <p class="sh-how"><b>Put your mouse on the cards and scroll:</b> they slide sideways. Move the mouse above or below the cards and the page scrolls down as normal.</p>
   </div>
   <div class="track" id="track" tabindex="0" aria-label="Project sheets, scrolls sideways">
 
       <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.1</b></span><span>2026 · DMW</span></div>
+        <div class="sh-top"><span>PROJECT <b>01</b></span><span>2026 · DMW</span></div>
         <h3>QMS Internal Audit Management System</h3>
-        <div class="cat">AUDIT &amp; COMPLIANCE PLATFORM</div>
+        <div class="cat">RUNS EVERY INTERNAL AUDIT ACROSS 8 PLANTS</div>
         <div class="pipe" data-steps="Plan|Checklist|NCR|CAPA|Review"></div>
         <ul>
           <li>Runs internal audits across 8 plants and 13 departments: role-based logins, auditor assignment, reminders before each audit and 147 pre-loaded clause checklists.</li>
@@ -551,9 +544,38 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       </article>
 
       <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.2</b></span><span>2026 · DMW</span></div>
+        <div class="sh-top"><span>PROJECT <b>02</b></span><span>2026 · DMW · CONTINUED</span></div>
+        <h3>DMW Revenue Pulse</h3>
+        <div class="cat">5 YEARS OF COMPANY REVENUE IN ONE DASHBOARD</div>
+        <div class="pipe" data-steps="ERP data|Clean|Reconcile|Dashboard"></div>
+        <ul>
+          <li>Python pipeline that cleans and reconciles five years of revenue data (112,000+ ERP invoice lines); every value traces back to its source file and cell.</li>
+          <li>Dashboard for target-vs-actual, customer, part and plant analysis with risk flags and a year-end outlook.</li>
+          <li>Reviewed with the CFO and finance team and now in use at DMW.</li>
+          <li>Also built <b style="color:#fff">DMW Sales Analytics</b>: 25 sales report matrices from one Excel upload.</li>
+        </ul>
+        <div class="tech"><span>Python</span><span>Pandas</span><span>Laravel</span><span>Chart.js</span></div>
+        <span class="sh-link int">IN USE AT DMW · INTERNAL</span>
+      </article>
+
+      <article class="sheet panel pf">
+        <div class="sh-top"><span>PROJECT <b>03</b></span><span>2026 · DMW · CONTINUED</span></div>
+        <h3>HireLine</h3>
+        <div class="cat">HIRING, FROM VACANCY TO JOINING DAY</div>
+        <div class="pipe" data-steps="Vacancy|Resumes|Screening|Interviews|Joining"></div>
+        <ul>
+          <li>Recruitment system from vacancy approval to joining: resume parsing, weighted screening scores, interview rounds, offers, role-based access and a full audit trail.</li>
+          <li>Resume screening runs on a local LLM on the company server, so candidate data never leaves DMW.</li>
+          <li>1,015 existing records imported; now in use by HR.</li>
+        </ul>
+        <div class="tech"><span>PHP</span><span>MySQL</span><span>Ollama (local LLM)</span></div>
+        <span class="sh-link int">IN USE AT DMW · INTERNAL</span>
+      </article>
+
+      <article class="sheet panel pf">
+        <div class="sh-top"><span>PROJECT <b>04</b></span><span>2026 · DMW</span></div>
         <h3>KPI Insights Visualizer</h3>
-        <div class="cat">OFFLINE KPI DASHBOARD</div>
+        <div class="cat">ALL PLANT KPIs IN ONE OFFLINE DASHBOARD</div>
         <p class="ba-how"><b>Drag the gold bar left and right.</b> Left side: how KPI reports looked before, as scattered Excel sheets from every plant. Right side: the one dashboard that replaced them.</p>
         <div class="ba" id="ba" role="img" aria-label="Before and after: scattered Excel sheets on the left, one KPI dashboard on the right">
           <div class="lay bef"><div class="fn">KPI_all_plants_FINAL_v7 (2) - Copy.xlsx</div><div class="g" id="ba-g"></div></div>
@@ -571,9 +593,9 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       </article>
 
       <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.3</b></span><span>2026 · DMW</span></div>
+        <div class="sh-top"><span>PROJECT <b>05</b></span><span>2026 · DMW</span></div>
         <h3>NC Analysis</h3>
-        <div class="cat">NON-CONFORMANCE ANALYTICS</div>
+        <div class="cat">SPOTS QUALITY PROBLEMS THAT KEEP REPEATING</div>
         <div class="pipe" data-steps="Upload|Normalise|Trends|Red flags"></div>
         <ul>
           <li>Tracks and analyses non-conformances, quality trends and corrective actions across plants and departments.</li>
@@ -585,38 +607,9 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       </article>
 
       <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.4</b></span><span>2026 · DMW · CONTINUED</span></div>
-        <h3>DMW Revenue Pulse</h3>
-        <div class="cat">REVENUE ANALYTICS</div>
-        <div class="pipe" data-steps="ERP data|Clean|Reconcile|Dashboard"></div>
-        <ul>
-          <li>Python pipeline that cleans and reconciles five years of revenue data (112,000+ ERP invoice lines); every value traces back to its source file and cell.</li>
-          <li>Dashboard for target-vs-actual, customer, part and plant analysis with risk flags and a year-end outlook.</li>
-          <li>Reviewed with the CFO and finance team and now in use at DMW.</li>
-          <li>Also built <b style="color:#fff">DMW Sales Analytics</b>: 25 sales report matrices from one Excel upload.</li>
-        </ul>
-        <div class="tech"><span>Python</span><span>Pandas</span><span>Laravel</span><span>Chart.js</span></div>
-        <span class="sh-link int">IN USE AT DMW · INTERNAL</span>
-      </article>
-
-      <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.5</b></span><span>2026 · DMW · CONTINUED</span></div>
-        <h3>HireLine</h3>
-        <div class="cat">RECRUITMENT SYSTEM</div>
-        <div class="pipe" data-steps="Vacancy|Resumes|Screening|Interviews|Joining"></div>
-        <ul>
-          <li>Recruitment system from vacancy approval to joining: resume parsing, weighted screening scores, interview rounds, offers, role-based access and a full audit trail.</li>
-          <li>Resume screening runs on a local LLM on the company server, so candidate data never leaves DMW.</li>
-          <li>1,015 existing records imported; now in use by HR.</li>
-        </ul>
-        <div class="tech"><span>PHP</span><span>MySQL</span><span>Ollama (local LLM)</span></div>
-        <span class="sh-link int">IN USE AT DMW · INTERNAL</span>
-      </article>
-
-      <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.6</b></span><span>2025</span></div>
+        <div class="sh-top"><span>PROJECT <b>06</b></span><span>2025</span></div>
         <h3>Document Analyzer</h3>
-        <div class="cat">OCR × VISION × RAG PIPELINE</div>
+        <div class="cat">READS DOCUMENTS AND ANSWERS QUESTIONS</div>
         <div class="pipe" data-steps="OCR|OpenCV·CLIP|Chunks|RAG"></div>
         <ul>
           <li>OCR, vision and LLM pipeline that turns scanned documents into structured, queryable chunks, isolating signatures, tables and diagrams.</li>
@@ -627,9 +620,9 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       </article>
 
       <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.7</b></span><span>2025</span></div>
+        <div class="sh-top"><span>PROJECT <b>07</b></span><span>2025</span></div>
         <h3>Supply IQ</h3>
-        <div class="cat">SUPPLY CHAIN INTELLIGENCE PLATFORM</div>
+        <div class="cat">PREDICTS DEMAND AND FLAGS SUPPLY RISKS</div>
         <div class="pipe" data-steps="Prophet|Iso. Forest|TF-IDF|LLaMA 70B"></div>
         <ul>
           <li>Full-stack platform with 30-day demand forecasting and anomaly-based supply-risk scoring.</li>
@@ -641,9 +634,9 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       </article>
 
       <article class="sheet panel pf">
-        <div class="sh-top"><span>SHEET <b>5.8</b></span><span>2025</span></div>
+        <div class="sh-top"><span>PROJECT <b>08</b></span><span>2025</span></div>
         <h3>Attention Sense AI</h3>
-        <div class="cat">REAL-TIME ATTENTION MONITORING</div>
+        <div class="cat">MEASURES FOCUS THROUGH A WEBCAM</div>
         <div class="pipe" data-steps="Face Mesh|Signals|Focus score|LLM report"></div>
         <ul>
           <li>Tracks eye position, head pose, blink rate and distraction states in real time with MediaPipe Face Mesh.</li>
@@ -655,24 +648,22 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
       </article>
 
   </div>
-  <div class="sbar"><span id="sh-count">5.1 / 5.8</span><div id="sb-rail" aria-hidden="true"><i id="sb-thumb"></i></div><span>SCROLL OR DRAG →</span></div>
+  <div class="sbar"><span id="sh-count">1 / 8</span><div id="sb-rail" aria-hidden="true"><i id="sb-thumb"></i></div><span>SCROLL OR DRAG →</span></div>
 </section>
 
 <!-- ============ 06 BILL OF MATERIALS ============ -->
 <section id="bom" data-kf="bom" data-sheet="06" data-title="BILL OF MATERIALS">
   <div class="half r" style="width:min(100%,720px)">
-    <div class="sheet-tag">SHEET 06 · BILL OF MATERIALS</div>
-    <h2 class="ink sm">The stack</h2>
+    <h2 class="ink sm">Skills</h2>
     <div class="bom-hint">← HOVER A ROW: ITS PART LIGHTS UP ON THE MACHINE</div>
-    <div class="bom pf dmx" role="table" aria-label="Skills">
-      <div class="bom-h" role="row"><span>ITEM</span><span>PART</span><span>SPECIFICATION</span><span>QTY</span></div>
-      <div class="bom-r rv" role="row" data-part="LANGUAGES"><span class="no">01</span><span class="pt">Languages</span><span class="sp">Python · PHP · SQL · JavaScript · C · C++</span><span class="q">6</span></div>
-      <div class="bom-r rv" role="row" data-part="RAG &amp; LLMs"><span class="no">02</span><span class="pt">AI / ML</span><span class="sp">Machine Learning · Deep Learning · Computer Vision · LLMs · RAG · Embeddings · AI Agents · Prompt Engineering</span><span class="q">8</span></div>
-      <div class="bom-r rv" role="row" data-part="COMPUTER VISION"><span class="no">03</span><span class="pt">Libraries</span><span class="sp">OpenCV · MediaPipe · LLaMA · LLaVA · CLIP · Pandas · NumPy · Plotly · Prophet</span><span class="q">9</span></div>
-      <div class="bom-r rv" role="row" data-part="DEPLOYMENT"><span class="no">04</span><span class="pt">Tools</span><span class="sp">Laravel · MySQL · FastAPI · Next.js · Gradio · Ollama · Hugging Face · Docker · Git · Tesseract · PyMuPDF</span><span class="q">11</span></div>
-      <div class="bom-r rv" role="row" data-part="COMPLIANCE"><span class="no">05</span><span class="pt">Security &amp; Compliance</span><span class="sp">Internal audit systems · NCR management · anomaly detection · on-prem data-private AI</span><span class="q">4</span></div>
-      <div class="bom-r rv" role="row" data-part="IoT"><span class="no">06</span><span class="pt">IoT &amp; Embedded</span><span class="sp">UART · SPI · I²C · MQTT · CoAP · BLE · LoRaWAN</span><span class="q">7</span></div>
-      <div class="bom-r rv" role="row" data-part="DATA &amp; ANALYTICS"><span class="no">07</span><span class="pt">Human Interface</span><span class="sp">Team leadership · project management · technical communication · cross-team collaboration</span><span class="q">4</span></div>
+    <div class="bom pf dmx" aria-label="Skills">
+      <div class="bom-r rv" data-part="LANGUAGES"><h3 class="pt">Languages</h3><ul class="sk"><li>Python</li><li>PHP</li><li>SQL</li><li>JavaScript</li><li>C</li><li>C++</li></ul></div>
+      <div class="bom-r rv" data-part="RAG &amp; LLMs"><h3 class="pt">AI / ML</h3><ul class="sk"><li>Machine Learning</li><li>Deep Learning</li><li>Computer Vision</li><li>LLMs</li><li>RAG</li><li>Embeddings</li><li>AI Agents</li><li>Prompt Engineering</li></ul></div>
+      <div class="bom-r rv" data-part="COMPUTER VISION"><h3 class="pt">AI libraries</h3><ul class="sk"><li>OpenCV</li><li>MediaPipe</li><li>LLaMA</li><li>LLaVA</li><li>CLIP</li><li>Pandas</li><li>NumPy</li><li>Plotly</li><li>Prophet</li></ul></div>
+      <div class="bom-r rv" data-part="DEPLOYMENT"><h3 class="pt">Tools &amp; frameworks</h3><ul class="sk"><li>Laravel</li><li>MySQL</li><li>FastAPI</li><li>Next.js</li><li>Gradio</li><li>Ollama</li><li>Hugging Face</li><li>Docker</li><li>Git</li><li>Tesseract</li><li>PyMuPDF</li></ul></div>
+      <div class="bom-r rv" data-part="COMPLIANCE"><h3 class="pt">Security &amp; compliance</h3><ul class="sk"><li>Internal audit systems</li><li>NCR management</li><li>Anomaly detection</li><li>On-prem data-private AI</li></ul></div>
+      <div class="bom-r rv" data-part="IoT"><h3 class="pt">IoT &amp; embedded</h3><ul class="sk"><li>UART</li><li>SPI</li><li>I²C</li><li>MQTT</li><li>CoAP</li><li>BLE</li><li>LoRaWAN</li></ul></div>
+      <div class="bom-r rv" data-part="DATA &amp; ANALYTICS"><h3 class="pt">People skills</h3><ul class="sk"><li>Team leadership</li><li>Project management</li><li>Technical communication</li><li>Cross-team collaboration</li></ul></div>
     </div>
   </div>
 </section>
@@ -680,8 +671,7 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 <!-- ============ 07 CERTIFICATION & EDUCATION ============ -->
 <section id="certs" data-kf="certs" data-sheet="07" data-title="CERTIFICATION & EDUCATION">
   <div class="half" style="width:min(100%,760px)">
-    <div class="sheet-tag">SHEET 07 · CERTIFICATION &amp; EDUCATION</div>
-    <h2 class="ink sm">Credentials</h2>
+    <h2 class="ink sm">Certificates</h2>
     <div class="cert-grid">
       <div class="cert panel rv"><em>CERT · 2026</em><b>Oracle Cloud Infrastructure AI Foundations Associate</b><span>Exam 1Z0-1122</span></div>
       <div class="cert panel rv"><em>AWARD · 2026</em><b>Letter of Appreciation</b><span>Chief People Officer, DMW CNC Solutions</span></div>
@@ -701,7 +691,6 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
 
 <!-- ============ 08 SIGN-OFF ============ -->
 <section id="signoff" data-kf="signoff" data-sheet="08" data-title="SIGN-OFF">
-  <div class="sheet-tag">SHEET 08 · SIGN-OFF</div>
   <h2 class="so-big">Let's build<br><span class="y">something that ships.</span></h2>
   <div class="btns">
     <a class="btn solid" href="mailto:sundarpro.csrm@gmail.com">EMAIL ME →</a>
@@ -714,16 +703,16 @@ footer{background:var(--bp-night);position:relative;z-index:10;padding:28px var(
     <div><em>LOCATION</em><span>Chennai, India</span></div>
     <div><em>ROLES</em><span>AI / ML Engineer · Data Scientist · Data Analyst</span></div>
     <div><em>STATUS</em><span style="color:var(--hi)">Open to internships &amp; full-time</span></div>
-    <div class="punch" id="punch"><em style="margin:0">S/N</em><svg id="punch-svg" aria-label="Open to work" role="img"></svg></div>
+    <div class="punch" id="punch"><svg id="punch-svg" aria-label="Open to work" role="img"></svg></div>
   </div></div>
 </section>
 
 </main>
 
 <footer>
-  <span>© 2026 SUNDAR RAM R · DWG SRR-2027</span>
+  <span>© 2026 SUNDAR RAM R</span>
   <span>B.TECH COMPUTING &amp; DATA SCIENCE · SAI UNIVERSITY</span>
-  <span>DRAWN IN CHENNAI · REV 27</span>
+  <span>MADE IN CHENNAI</span>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -835,13 +824,13 @@ function drawLoader(t,now){
       ctx.beginPath();ctx.moveTo(q[0],q[1]-u*1.3);ctx.lineTo(q[0],tb[1]-u*5);ctx.stroke();
       ctx.globalAlpha=.5;ctx.beginPath();ctx.arc(q[0],q[1],u*(1+((p*dots.length)%1)*2.2),0,7);ctx.stroke();}
     ctx.globalAlpha=seg(t,.94,.98);ctx.font=FM(u*1.55);ctx.fillStyle='#d6e4ff';
-    ctx.fillText('S/N SRR-2027 · B.TECH CDS · REV 27',tb[0]+u*3,tb[1]+tb[3]-u*2);
+    ctx.fillText('B.TECH COMPUTING & DATA SCIENCE · 2027',tb[0]+u*3,tb[1]+tb[3]-u*2);
     ctx.restore();
   }
   ctx.restore();
   /* status + percent */
   ctx.save();ctx.fillStyle='#d6e4ff';ctx.font=FM(Math.max(10,u*1.6));
-  const msgs=['PLOTTING SHEET SRR-2027','DRAWING ASSY-01 · SPINDLE UNIT','INKING TITLE','PUNCHING SERIAL','READY'];
+  const msgs=['DRAWING THE PAGE','DRAWING THE MACHINE','WRITING THE NAME','PUNCHING THE TITLE','READY'];
   ctx.fillText('> '+msgs[Math.min(4,Math.floor(t*4.6))],ox+u*8,oy+u*10);
   ctx.fillStyle=WH;ctx.font=FM(Math.max(14,u*3.2));ctx.fillText(String(Math.round(seg(t,0,.95)*100)).padStart(3,'0')+'%',ox+u*6,oy+h-u*7);
   ctx.restore();
@@ -1130,7 +1119,7 @@ document.querySelectorAll('.pf').forEach(el=>{
 const pipeIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('drawn');}),{threshold:.3});
 (()=>{const tr=document.getElementById('track'),rail=document.getElementById('sb-rail'),th=document.getElementById('sb-thumb'),cnt=document.getElementById('sh-count');if(!tr)return;
   const n=tr.children.length,max=()=>tr.scrollWidth-tr.clientWidth;let tx=0,cx=0,anim=false;
-  function bar(){const m=max(),p=m>0?tr.scrollLeft/m:0,w=Math.max(.12,Math.min(1,tr.clientWidth/tr.scrollWidth));th.style.width=(w*100)+'%';th.style.left=(p*(1-w)*100)+'%';cnt.textContent='5.'+(1+Math.round(p*(n-1)))+' / 5.'+n;}
+  function bar(){const m=max(),p=m>0?tr.scrollLeft/m:0,w=Math.max(.12,Math.min(1,tr.clientWidth/tr.scrollWidth));th.style.width=(w*100)+'%';th.style.left=(p*(1-w)*100)+'%';cnt.textContent=(1+Math.round(p*(n-1)))+' / '+n;}
   function step(){cx+=(tx-cx)*.16;if(Math.abs(tx-cx)<.6){cx=tx;anim=false;}tr.scrollLeft=cx;if(anim)requestAnimationFrame(step);}
   function go(x){tx=clamp(x,0,max());if(!anim){anim=true;cx=tr.scrollLeft;requestAnimationFrame(step);}}
   tr.addEventListener('wheel',e=>{if(e.ctrlKey)return;if(Math.abs(e.deltaX)>Math.abs(e.deltaY)){e.stopPropagation();return;}
@@ -1247,10 +1236,8 @@ function scrollFX(){
   /* punched S/N on contact */
   ScrollTrigger.create({trigger:'#punch',start:'top 85%',onEnter:()=>document.getElementById('punch').classList.add('go')});
   /* HUD: sheet number, title, progress marker */
-  const hs=document.querySelector('#hud-sheet b'),ht=document.getElementById('hud-title'),hy=document.getElementById('hud-y'),pm=document.getElementById('pmark');
-  document.querySelectorAll('[data-sheet]').forEach(sec=>ScrollTrigger.create({trigger:sec,start:'top 50%',end:'bottom 50%',
-    onToggle(self){if(self.isActive){hs.textContent=sec.dataset.sheet;ht.textContent=sec.dataset.title;}}}));
-  ScrollTrigger.create({start:0,end:'max',onUpdate(self){hy.textContent=(self.progress*100).toFixed(1).padStart(5,'0');pm.style.top=(self.progress*100)+'%';}});
+  const pm=document.getElementById('pmark');
+  ScrollTrigger.create({start:0,end:'max',onUpdate(self){pm.style.top=(self.progress*100)+'%';}});
   ScrollTrigger.addEventListener('refresh',computeAnchors);
   ScrollTrigger.refresh();
 }
